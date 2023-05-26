@@ -1,22 +1,17 @@
 -module(amoc_rest_server).
 
-
 -define(DEFAULT_LOGIC_HANDLER, amoc_rest_default_logic_handler).
 
 -export([start/2]).
 
--spec start( ID :: any(), #{
-    ip            => inet:ip_address(),
-    port          => inet:port_number(),
-    logic_handler => module(),
-    net_opts      => []
-}) -> {ok, pid()} | {error, any()}.
-
-start(ID, #{
-    ip            := IP ,
-    port          := Port,
-    net_opts      := NetOpts
-} = Params) ->
+-spec start(ID :: any(), #{ip            => inet:ip_address(),
+                           port          => inet:port_number(),
+                           logic_handler => module(),
+                           net_opts      => []}) ->
+    {ok, pid()} | {error, any()}.
+start(ID, #{ip            := IP ,
+            port          := Port,
+            net_opts      := NetOpts} = Params) ->
     {Transport, TransportOpts} = get_socket_transport(IP, Port, NetOpts),
     LogicHandler = maps:get(logic_handler, Params, ?DEFAULT_LOGIC_HANDLER),
     CowboyOpts = get_default_opts(LogicHandler),
