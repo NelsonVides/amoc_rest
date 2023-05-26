@@ -13,8 +13,8 @@
         amoc,
         docsh
     ]},
-    {env, [
-    ]},
+    {mod, {amoc_rest_app, []}},
+    {env, []},
     {modules, []},
     {licenses, []},
     {links, []}

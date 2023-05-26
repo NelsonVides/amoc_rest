@@ -2,7 +2,7 @@
 
 -define(DEFAULT_LOGIC_HANDLER, amoc_rest_default_logic_handler).
 
--export([start/2]).
+-export([start/2, stop/1]).
 
 -spec start(ID :: any(), #{ip            => inet:ip_address(),
                            port          => inet:port_number(),
@@ -21,6 +21,10 @@ start(ID, #{ip            := IP ,
         tcp ->
             cowboy:start_clear(ID, TransportOpts, CowboyOpts)
     end.
+
+-spec stop(any()) -> ok | {error, not_found}.
+stop(ID) ->
+    cowboy:stop_listener(ID).
 
 get_socket_transport(IP, Port, Options) ->
     Opts = [
