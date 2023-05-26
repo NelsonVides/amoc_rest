@@ -10,7 +10,8 @@
         jsx,
         jesse,
         cowboy,
-        amoc
+        amoc,
+        docsh
     ]},
     {env, [
     ]},
